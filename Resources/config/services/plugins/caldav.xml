@@ -7,7 +7,7 @@
     <parameters>
         <parameter key="secotrust.sabredav.caldav_backend.class">Secotrust\Bundle\SabreDavBundle\SabreDav\CalDavBackend</parameter>
         <parameter key="secotrust.sabredav.caldav_plugin.class">Sabre\CalDAV\Plugin</parameter>
-	<parameter key="secotrust.sabredav.caldav_collection.class">Sabre\CalDAV\CalendarRootNode</parameter>
+	<parameter key="secotrust.sabredav.caldav_collection.class">Sabre\CalDAV\CalendarRoot</parameter>
     </parameters>
 
     <services>

@@ -159,7 +159,7 @@ class PrincipalBackend extends AbstractBackend implements CreatePrincipalSupport
      */
     public function getPrincipalsByPrefix($prefixPath)
     {
-        $userlist = $this->_em->getRepository($this->principals_class)->findBy(array('enabled' => true));
+        $userlist = $this->user_manager->findUsers();
         $principals = array();
 
         foreach ($userlist as $user) {

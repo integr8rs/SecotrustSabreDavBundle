@@ -121,7 +121,7 @@ class CalDavBackend implements BackendInterface
      * @param array $mutations
      * @return bool|array
      */
-    public function updateCalendar($calendarId, array $mutations){
+    public function updateCalendar($calendarId, \Sabre\DAV\PropPatch $propPatch){
 	return true;
     }
 
@@ -182,6 +182,23 @@ class CalDavBackend implements BackendInterface
      */
     public function getCalendarObject($calendarId,$objectUri){
 	return array($calendarId);
+    }
+
+    /**
+     * Returns a list of calendar objects.
+     *
+     * This method should work identical to getCalendarObject, but instead
+     * return all the calendar objects in the list as an array.
+     *
+     * If the backend supports this, it may allow for some speed-ups.
+     *
+     * @param mixed $calendarId
+     * @param array $uris
+     * @return array
+     */
+    function getMultipleCalendarObjects($calendarId, array $uris)
+    {
+        return array($calendarId);
     }
 
     /**
@@ -286,5 +303,29 @@ class CalDavBackend implements BackendInterface
      */
     public function calendarQuery($calendarId, array $filters){
 	return array($calendarId);
+    }
+
+    /**
+     * Searches through all of a users calendars and calendar objects to find
+     * an object with a specific UID.
+     *
+     * This method should return the path to this object, relative to the
+     * calendar home, so this path usually only contains two parts:
+     *
+     * calendarpath/objectpath.ics
+     *
+     * If the uid is not found, return null.
+     *
+     * This method should only consider * objects that the principal owns, so
+     * any calendars owned by other principals that also appear in this
+     * collection should be ignored.
+     *
+     * @param string $principalUri
+     * @param string $uid
+     * @return string|null
+     */
+    function getCalendarObjectByUID($principalUri, $uid)
+    {
+        return null;
     }
 }

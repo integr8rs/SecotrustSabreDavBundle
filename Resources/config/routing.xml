@@ -4,7 +4,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="secotrust_sabre_dav" pattern="/{url}" methods="HEAD,GET,POST,OPTIONS,PROPFIND,PROPPATCH,MKCOL,COPY,MOVE,DELETE,LOCK,UNLOCK,PUT,PATCH,REPORT">
+    <route id="secotrust_sabre_dav" path="/{url}" methods="HEAD,GET,POST,OPTIONS,PROPFIND,PROPPATCH,MKCOL,COPY,MOVE,DELETE,LOCK,UNLOCK,PUT,PATCH,REPORT">
         <default key="_controller">secotrust.sabredav.controller:execAction</default>
 	<default key="url"></default>
         <requirement key="url">/?.*</requirement>
