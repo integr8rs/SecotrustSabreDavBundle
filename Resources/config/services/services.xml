@@ -17,7 +17,6 @@
     <services>
         <service id="secotrust.sabredav.controller" class="%secotrust.sabredav.controller.class%">
             <argument type="service" id="secotrust.sabredav.server" />
-            <argument type="service" id="event_dispatcher" />
             <argument type="service" id="router" />
         </service>
         <service id="secotrust.sabredav.server" class="%secotrust.sabredav.server.class%">
