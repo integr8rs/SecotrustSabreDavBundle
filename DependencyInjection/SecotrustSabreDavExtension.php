@@ -34,6 +34,7 @@ class SecotrustSabreDavExtension extends Extension
 
         if (isset($config['base_uri'])) {
             $container->getDefinition('secotrust.sabredav.server')->addMethodCall('setBaseUri', array($config['base_uri']));
+            $container->setParameter('secotrust.sabredav.base_uri', $config['base_uri']);
         }
 
         // load all plugins

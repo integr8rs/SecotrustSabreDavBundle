@@ -34,8 +34,9 @@ class SabreDavController
      * @param Server          $dav
      * @param RouterInterface $router
      */
-    public function __construct(Server $dav, RouterInterface $router)
+    public function __construct(Server $dav, RouterInterface $router, $base_uri = '')
     {
+        $router->getContext()->setBaseUrl($router->getContext()->getBaseUrl() . $base_uri);
         $this->dav = $dav;
         $this->dav->setBaseUri($router->generate('secotrust_sabre_dav', array()));
     }

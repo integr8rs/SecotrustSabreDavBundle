@@ -7,6 +7,7 @@
     <parameters>
         <parameter key="secotrust.sabredav.controller.class">Secotrust\Bundle\SabreDavBundle\Controller\SabreDavController</parameter>
         <parameter key="secotrust.sabredav.server.class">Sabre\DAV\Server</parameter>
+        <parameter key="secotrust.sabredav.base_uri"></parameter>
         <parameter key="secotrust.sabredav.server.nodes" type="collection">
             <parameter id="secotrust.sabredav_principal_collection" />
             <parameter id="secotrust.sabredav_carddav_collection" />
@@ -18,6 +19,7 @@
         <service id="secotrust.sabredav.controller" class="%secotrust.sabredav.controller.class%">
             <argument type="service" id="secotrust.sabredav.server" />
             <argument type="service" id="router" />
+            <argument>%secotrust.sabredav.base_uri%</argument>
         </service>
         <service id="secotrust.sabredav.server" class="%secotrust.sabredav.server.class%">
             <argument id="secotrust.sabredav.server.nodes" />
