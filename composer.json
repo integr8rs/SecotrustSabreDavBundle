@@ -31,9 +31,8 @@
         "gedmo/doctrine-extensions": "~2.3"
     },
     "autoload": {
-        "psr-0": { "Secotrust\\Bundle\\SabreDavBundle": "" }
+        "psr-4": { "Secotrust\\Bundle\\SabreDavBundle\\": "" }
     },
-    "target-dir": "Secotrust/Bundle/SabreDavBundle",
     "extra": {
         "branch-alias": {
             "dev-master": "2.0.x-dev"
