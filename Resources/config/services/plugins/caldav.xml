@@ -7,23 +7,20 @@
     <parameters>
         <parameter key="secotrust.sabredav.caldav_backend.class">Secotrust\Bundle\SabreDavBundle\SabreDav\CalDavBackend</parameter>
         <parameter key="secotrust.sabredav.caldav_plugin.class">Sabre\CalDAV\Plugin</parameter>
-	<parameter key="secotrust.sabredav.caldav_collection.class">Sabre\CalDAV\CalendarRoot</parameter>
+        <parameter key="secotrust.sabredav.caldav_collection.class">Sabre\CalDAV\CalendarRoot</parameter>
     </parameters>
 
     <services>
         <service id="secotrust.sabredav_caldav_backend" class="%secotrust.sabredav.caldav_backend.class%" public="false">
-            <argument type="service" id="security.context" />
-	    <argument type="service" id="service_container" />
+            <argument type="service" id="service_container" />
         </service>
-	<service id="secotrust.sabredav_caldav_plugin" class="%secotrust.sabredav.caldav_plugin.class%" public="false">
-            <argument>false</argument>
+        <service id="secotrust.sabredav_caldav_plugin" class="%secotrust.sabredav.caldav_plugin.class%" public="false">
             <tag name="secotrust.sabredav.plugin" />
         </service>
         <service id="secotrust.sabredav_caldav_collection" class="%secotrust.sabredav.caldav_collection.class%" public="false">
             <argument type="service" id="secotrust.sabredav_principal_backend"/>
-	    <argument type="service" id="secotrust.sabredav_caldav_backend" />
+            <argument type="service" id="secotrust.sabredav_caldav_backend" />
             <tag name="secotrust.sabredav.collection" />
-        </service>	
-
+        </service>
     </services>
 </container>

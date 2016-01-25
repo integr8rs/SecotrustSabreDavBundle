@@ -13,43 +13,40 @@ namespace Secotrust\Bundle\SabreDavBundle\SabreDav;
 
 use Sabre\CalDAV\Backend\BackendInterface;
 use Sabre\DAV\Exception;
-use Sabre\DAV\Server;
-use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class CalDavBackend implements BackendInterface
 {
     /**
-     * @var SecurityContextInterface
-     */
-    private $context;
-
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
-
-    /**
      * @var ContainerInterface
      */
     private $_em;
-        
+
+    /**
+     * @var string
+     */
+    private $calendar_class;
+
+    /**
+     * @var string
+     */
+    private $calendarobjects_class;
+
     /**
      * Constructor
      *
-     * @param SecurityContextInterface $context
      * @param ContainerInterface $container
      */
-    public function __construct(SecurityContextInterface $context, ContainerInterface $container)
+    public function __construct(ContainerInterface $container)
     {
-        $this->context = $context;
-	$this->container = $container;
-	
-	$this->_em = $container->get('doctrine')->getManager();
+        $this->_em = $container->get('doctrine')->getManager();
+
+        $this->calendar_class = $container->getParameter('secotrust.calendar_class');
+        $this->calendarobjects_class = $container->getParameter('secotrust.calendarobjects_class');
     }
 
-    
-     /**
+    /**
      * Returns a list of calendars for a principal.
      *
      * Every project is an array with the following keys:
@@ -66,8 +63,9 @@ class CalDavBackend implements BackendInterface
      * @param string $principalUri
      * @return array
      */
-    public function getCalendarsForUser($principalUri) {
-	return array($principalUri);
+    public function getCalendarsForUser($principalUri)
+    {
+        return array($principalUri);
     }
 
     /**
@@ -81,8 +79,9 @@ class CalDavBackend implements BackendInterface
      * @param array $properties
      * @return void
      */
-    public function createCalendar($principalUri,$calendarUri,array $properties){
-	return;
+    public function createCalendar($principalUri, $calendarUri, array $properties)
+    {
+        return;
     }
 
     /**
@@ -118,11 +117,13 @@ class CalDavBackend implements BackendInterface
      * (424 Failed Dependency) because the request needs to be atomic.
      *
      * @param mixed $calendarId
-     * @param array $mutations
+     * @param $calendarId
+     * @param \Sabre\DAV\PropPatch $propPatch
      * @return bool|array
      */
-    public function updateCalendar($calendarId, \Sabre\DAV\PropPatch $propPatch){
-	return true;
+    public function updateCalendar($calendarId, \Sabre\DAV\PropPatch $propPatch)
+    {
+        return true;
     }
 
     /**
@@ -131,8 +132,9 @@ class CalDavBackend implements BackendInterface
      * @param mixed $calendarId
      * @return void
      */
-    public function deleteCalendar($calendarId){
-	return;
+    public function deleteCalendar($calendarId)
+    {
+        return;
     }
 
     /**
@@ -162,8 +164,9 @@ class CalDavBackend implements BackendInterface
      * @param mixed $calendarId
      * @return array
      */
-    public function getCalendarObjects($calendarId){
-	return array($calendarId);
+    public function getCalendarObjects($calendarId)
+    {
+        return array($calendarId);
     }
 
     /**
@@ -180,8 +183,9 @@ class CalDavBackend implements BackendInterface
      * @param string $objectUri
      * @return array|null
      */
-    public function getCalendarObject($calendarId,$objectUri){
-	return array($calendarId);
+    public function getCalendarObject($calendarId, $objectUri)
+    {
+        return array($calendarId);
     }
 
     /**
@@ -217,8 +221,9 @@ class CalDavBackend implements BackendInterface
      * @param string $calendarData
      * @return string|null
      */
-    public function createCalendarObject($calendarId,$objectUri,$calendarData){
-	return null;
+    public function createCalendarObject($calendarId, $objectUri, $calendarData)
+    {
+        return null;
     }
 
     /**
@@ -237,8 +242,9 @@ class CalDavBackend implements BackendInterface
      * @param string $calendarData
      * @return string|null
      */
-    public function updateCalendarObject($calendarId,$objectUri,$calendarData){
-	return null;
+    public function updateCalendarObject($calendarId, $objectUri, $calendarData)
+    {
+        return null;
     }
 
     /**
@@ -248,8 +254,9 @@ class CalDavBackend implements BackendInterface
      * @param string $objectUri
      * @return void
      */
-    public function deleteCalendarObject($calendarId,$objectUri){
-	return null;
+    public function deleteCalendarObject($calendarId, $objectUri)
+    {
+        return null;
     }
 
     /**
@@ -301,8 +308,9 @@ class CalDavBackend implements BackendInterface
      * @param array $filters
      * @return array
      */
-    public function calendarQuery($calendarId, array $filters){
-	return array($calendarId);
+    public function calendarQuery($calendarId, array $filters)
+    {
+        return array($calendarId);
     }
 
     /**

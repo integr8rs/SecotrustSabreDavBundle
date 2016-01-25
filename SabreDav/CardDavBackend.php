@@ -21,11 +21,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class CardDavBackend extends AbstractBackend implements SyncSupport
 {
     /**
-     * @var ContainerInterface
-     */
-    private $container;
-
-    /**
      * @var \Doctrine\ORM\EntityManager
      */
     private $_em;
