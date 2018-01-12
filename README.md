@@ -8,8 +8,8 @@ This fork removes dependency on FOS/userbundle and tries to migrate it to symfon
 
 ## Documentation ##
 
-[Read the documentation in Resources/doc/](https://github.com/secotrust/SecotrustSabreDavBundle/blob/master/Resources/doc/index.md)
+[Read the documentation in Resources/doc/](Resources/doc/index.md)
 
 ## License ##
 
-See [Resources/meta/LICENSE](https://github.com/secotrust/SecotrustSabreDavBundle/blob/master/Resources/meta/LICENSE).
+See [Resources/meta/LICENSE](Resources/meta/LICENSE).
