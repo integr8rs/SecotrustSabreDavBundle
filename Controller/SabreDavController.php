@@ -49,7 +49,11 @@ class SabreDavController
         if($useSymfonyExceptionhandler){
             // Use symfony exceptionhandler - much easier
             $exceptionCallback = function($exception) use ($exceptionHandler){
-                $exceptionHandler->handle($exception);
+                $namespace = "Sabre\DAV\Exception\\";
+                // Only handle exceptions of non-sabre-dav-type
+                if(substr(get_class($exception), 0, strlen($namespace)) !== $namespace){
+                    $exceptionHandler->handle($exception);
+                }
             };
             $this->dav->on('exception',$exceptionCallback);
         }
