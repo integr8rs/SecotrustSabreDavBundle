@@ -6,7 +6,7 @@
     "homepage": "https://github.com/secotrust/SecotrustSabreDavBundle",
     "license": "MIT",
     "minimum-stability": "stable",
-    "version": "2.1",
+    "version": "2.1.1",
     "authors": [
         {
             "name": "Henrik Westphal",

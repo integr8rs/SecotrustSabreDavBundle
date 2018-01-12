@@ -67,5 +67,6 @@ class SecotrustSabreDavExtension extends Extension
         $container->setParameter('secotrust.calendar_class', $config['settings']['calendar_class']);
         $container->setParameter('secotrust.principals_class', $config['settings']['principals_class']);
         $container->setParameter('secotrust.principalgroups_class', $config['settings']['principalgroups_class']);
+        $container->setParameter('secotrust.sabredav.use_symfony_exception_handler',$config['use_symfony_exception_handler']);
     }
 }
