@@ -6,6 +6,7 @@
 
     <parameters>
         <parameter key="secotrust.sabredav.controller.class">Secotrust\Bundle\SabreDavBundle\Controller\SabreDavController</parameter>
+        <parameter key="secotrust.sabredav.exceptionHandler.class">Symfony\Component\Debug\ExceptionHandler</parameter>
         <parameter key="secotrust.sabredav.server.class">Sabre\DAV\Server</parameter>
         <parameter key="secotrust.sabredav.base_uri"></parameter>
         <parameter key="secotrust.sabredav.server.nodes" type="collection">
@@ -19,10 +20,14 @@
         <service id="secotrust.sabredav.controller" class="%secotrust.sabredav.controller.class%">
             <argument type="service" id="secotrust.sabredav.server" />
             <argument type="service" id="router" />
+            <argument type="service" id="secotrust.sabredav.exceptionHandler" />
             <argument>%secotrust.sabredav.base_uri%</argument>
         </service>
         <service id="secotrust.sabredav.server" class="%secotrust.sabredav.server.class%">
             <argument id="secotrust.sabredav.server.nodes" />
         </service>
+        <service id="secotrust.sabredav.exceptionHandler" class="%secotrust.sabredav.exceptionHandler.class%">
+        </service>
+
     </services>
 </container>

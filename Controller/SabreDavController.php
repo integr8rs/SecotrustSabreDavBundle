@@ -17,6 +17,7 @@ use Secotrust\Bundle\SabreDavBundle\SabreDav\HttpResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Debug\ExceptionHandler;
 
 /**
  * Class SabreDavController.
@@ -34,11 +35,18 @@ class SabreDavController
      * @param Server          $dav
      * @param RouterInterface $router
      */
-    public function __construct(Server $dav, RouterInterface $router, $base_uri = '')
+    public function __construct(Server $dav, RouterInterface $router,
+        ExceptionHandler $exceptionHandler, $base_uri = '')
     {
         $router->getContext()->setBaseUrl($router->getContext()->getBaseUrl() . $base_uri);
         $this->dav = $dav;
         $this->dav->setBaseUri($router->generate('secotrust_sabre_dav', array()));
+
+        // Use symfony exceptionhandler - much easier
+        $exceptionCallback = function($exception) use ($exceptionHandler){
+            $exceptionHandler->handle($exception);
+        };
+        $this->dav->on('exception',$exceptionCallback);
     }
 
     /**
