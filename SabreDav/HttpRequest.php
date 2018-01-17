@@ -59,4 +59,14 @@ class HttpRequest extends BaseRequest
     {
         return $this->currentUsername;
     }
+
+    /**
+     * Get the original request back
+     *
+     * @return  Request
+     */
+    public function getSymfonyRequest()
+    {
+        return $this->request;
+    }
 }
