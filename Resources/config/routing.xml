@@ -6,7 +6,7 @@
 
     <route id="secotrust_sabre_dav" path="/{url}"
            methods="HEAD,GET,POST,OPTIONS,PROPFIND,PROPPATCH,MKCOL,COPY,MOVE,DELETE,LOCK,UNLOCK,PUT,PATCH,REPORT">
-        <default key="_controller">secotrust.sabredav.controller:execAction</default>
+        <default key="_controller">secotrust.sabredav.controller::execAction</default>
         <default key="url"></default>
         <requirement key="url">/?.*</requirement>
         <option key="expose">true</option>
