@@ -1,0 +1,6 @@
+# Phpstorm
+.idea
+
+# Do not add composer.lock since library
+/composer.lock
+/vendor
