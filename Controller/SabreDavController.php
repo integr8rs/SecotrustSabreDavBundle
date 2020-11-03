@@ -11,69 +11,14 @@
 
 namespace Secotrust\Bundle\SabreDavBundle\Controller;
 
-use Sabre\DAV\Server;
-use Secotrust\Bundle\SabreDavBundle\SabreDav\HttpRequest;
-use Secotrust\Bundle\SabreDavBundle\SabreDav\HttpResponse;
+use Secotrust\Bundle\SabreDavBundle\SabreDav\Server;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\StreamedResponse;
-use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Debug\ExceptionHandler;
 
-/**
- * Class SabreDavController.
- */
 class SabreDavController
 {
-    /**
-     * @var Server
-     */
-    private $dav;
-
-    /**
-     * Constructor.
-     *
-     * @param Server          $dav
-     * @param RouterInterface $router
-     */
-    public function __construct(
-        Server $dav,
-        RouterInterface $router,
-        ExceptionHandler $exceptionHandler,
-        bool $useSymfonyExceptionhandler,
-        $base_uri = '')
+    public function execAction(Request $request, Server $server): StreamedResponse
     {
-        $router->getContext()->setBaseUrl($router->getContext()->getBaseUrl() . $base_uri);
-        $this->dav = $dav;
-        $this->dav->setBaseUri($router->generate('secotrust_sabre_dav', array()));
-
-        if($useSymfonyExceptionhandler){
-            // Use symfony exceptionhandler - much easier
-            $exceptionCallback = function($exception) use ($exceptionHandler){
-                $namespace = "Sabre\DAV\Exception\\";
-                // Only handle exceptions of non-sabre-dav-type
-                if(substr(get_class($exception), 0, strlen($namespace)) !== $namespace){
-                    $exceptionHandler->handle($exception);
-                }
-            };
-            $this->dav->on('exception',$exceptionCallback);
-        }
-    }
-
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return StreamedResponse
-     */
-    public function execAction(Request $request)
-    {
-        $dav = $this->dav;
-        $callback = function () use ($dav) {
-            $dav->exec();
-        };
-        $response = new StreamedResponse($callback);
-        $dav->httpRequest = new HttpRequest($request);
-        $dav->httpResponse = new HttpResponse($response);
-
-        return $response;
+        return $server->handle($request);
     }
 }

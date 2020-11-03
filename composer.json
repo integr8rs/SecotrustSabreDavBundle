@@ -21,14 +21,11 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3",
-        "symfony/framework-bundle": "~2.2 || ^3.0 || ^4.0",
-        "sabre/dav": "~3.2.0"
+        "php": ">=7.1",
+        "symfony/framework-bundle": "~2.2 || ^3.0 || ^4.0 || ^5.0",
+        "sabre/dav": "~4.1"
     },
     "suggest": {
-        "knplabs/knp-gaufrette-bundle": "0.2.*",
-        "friendsofsymfony/user-bundle": ">=1.3.5",
-        "gedmo/doctrine-extensions": "~2.3"
     },
     "autoload": {
         "psr-4": { "Secotrust\\Bundle\\SabreDavBundle\\": "" }

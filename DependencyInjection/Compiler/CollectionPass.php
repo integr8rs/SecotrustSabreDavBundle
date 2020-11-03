@@ -25,7 +25,7 @@ class CollectionPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        $serverDefinition = $container->getDefinition('secotrust.sabredav.server');
+        $serverDefinition = $container->getDefinition('secotrust.sabredav.server.inner');
         $collections = array();
         foreach ($container->findTaggedServiceIds('secotrust.sabredav.collection') as $id => $attr) {
             $collections[] = new Reference($id);

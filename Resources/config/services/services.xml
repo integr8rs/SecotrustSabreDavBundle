@@ -6,10 +6,10 @@
 
     <parameters>
         <parameter key="secotrust.sabredav.controller.class">Secotrust\Bundle\SabreDavBundle\Controller\SabreDavController</parameter>
-        <parameter key="secotrust.sabredav.exceptionHandler.class">Symfony\Component\Debug\ExceptionHandler</parameter>
-        <parameter key="secotrust.sabredav.server.class">Sabre\DAV\Server</parameter>
-        <parameter key="secotrust.sabredav.base_uri"></parameter>
-        <parameter key="secotrust.sabredav.use_symfony_exception_handler"></parameter>
+        <parameter key="secotrust.sabredav.exceptionHandler.class">Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer</parameter>
+        <parameter key="secotrust.sabredav.server.inner.class">Sabre\DAV\Server</parameter>
+        <parameter key="secotrust.sabredav.server.class">Secotrust\Bundle\SabreDavBundle\SabreDav\Server</parameter>
+        <parameter key="secotrust.sabredav.use_symfony_exception_handler">1</parameter>
         <parameter key="secotrust.sabredav.server.nodes" type="collection">
             <parameter id="secotrust.sabredav_principal_collection" />
             <parameter id="secotrust.sabredav_carddav_collection" />
@@ -18,17 +18,17 @@
     </parameters>
 
     <services>
-        <service id="secotrust.sabredav.controller" class="%secotrust.sabredav.controller.class%">
-            <argument type="service" id="secotrust.sabredav.server" />
-            <argument type="service" id="router" />
-            <argument type="service" id="secotrust.sabredav.exceptionHandler" />
-            <argument>%secotrust.sabredav.use_symfony_exception_handler%</argument>
-            <argument>%secotrust.sabredav.base_uri%</argument>
-        </service>
         <service id="secotrust.sabredav.server" class="%secotrust.sabredav.server.class%">
+            <argument type="service" id="secotrust.sabredav.server.inner" />
+            <argument type="service" id="secotrust.sabredav.exceptionHandler" />
+            <argument type="service" id="router" />
+            <argument>%secotrust.sabredav.use_symfony_exception_handler%</argument>
+        </service>
+        <service id="secotrust.sabredav.server.inner" class="%secotrust.sabredav.server.inner.class%">
             <argument id="secotrust.sabredav.server.nodes" />
         </service>
         <service id="secotrust.sabredav.exceptionHandler" class="%secotrust.sabredav.exceptionHandler.class%">
+            <argument key="$debug">true</argument>
         </service>
 
     </services>

@@ -26,7 +26,7 @@ class PluginPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        $serverDefinition = $container->getDefinition('secotrust.sabredav.server');
+        $serverDefinition = $container->getDefinition('secotrust.sabredav.server.inner');
         $fileSystem = new FileSystem();
         foreach ($container->findTaggedServiceIds('secotrust.sabredav.plugin') as $id => $attr) {
             $serverDefinition->addMethodCall('addPlugin', array(new Reference($id)));
