@@ -22,7 +22,7 @@ class Configuration implements ConfigurationInterface
     /**
      * {@inheritdoc}
      */
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('secotrust_sabre_dav');
         if (\method_exists($treeBuilder, 'getRootNode')) {
