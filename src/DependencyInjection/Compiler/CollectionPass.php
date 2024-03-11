@@ -23,7 +23,7 @@ class CollectionPass implements CompilerPassInterface
     /**
      * {@inheritdoc}
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         $serverDefinition = $container->getDefinition('secotrust.sabredav.server.inner');
         $collections = array();

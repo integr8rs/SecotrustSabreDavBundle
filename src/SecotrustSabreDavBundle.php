@@ -24,9 +24,10 @@ class SecotrustSabreDavBundle extends Bundle
     /**
      * @param ContainerBuilder $container
      */
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         parent::build($container);
+
         $container->addCompilerPass(new CollectionPass());
         $container->addCompilerPass(new PluginPass());
     }

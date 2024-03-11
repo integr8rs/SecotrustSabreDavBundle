@@ -24,7 +24,7 @@ class PluginPass implements CompilerPassInterface
     /**
      * {@inheritdoc}
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         $serverDefinition = $container->getDefinition('secotrust.sabredav.server.inner');
         $fileSystem = new FileSystem();
