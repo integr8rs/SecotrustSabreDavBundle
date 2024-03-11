@@ -31,7 +31,7 @@
         "psr-4": { "Secotrust\\Bundle\\SabreDavBundle\\": "src" }
     },
     "autoload-dev": {
-        "psr-4": { "Secotrust\\Bundle\\SabreDavBundle\\Tests": "tests" }
+        "psr-4": { "Secotrust\\Bundle\\SabreDavBundle\\Tests\\": "tests" }
     },
     "extra": {
         "branch-alias": {
