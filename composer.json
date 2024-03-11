@@ -28,7 +28,7 @@
     "suggest": {
     },
     "autoload": {
-        "psr-4": { "Secotrust\\Bundle\\SabreDavBundle\\": "" }
+        "psr-4": { "Secotrust\\Bundle\\SabreDavBundle\\": "src" }
     },
     "extra": {
         "branch-alias": {
