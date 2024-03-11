@@ -31,7 +31,7 @@
             <argument key="$debug">true</argument>
         </service>
         <service id="secotrust.sabredav.controller" class="%secotrust.sabredav.controller.class%">
-            <tag>controller.service_arguments</tag>
+            <tag name="controller.service_arguments" />
             <argument type="service" id="secotrust.sabredav.server" />
         </service>
 
