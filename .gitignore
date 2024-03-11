@@ -1,6 +1,9 @@
 # Phpstorm
 .idea
 
+# Phpunit
+.phpunit.cache
+
 # Do not add composer.lock since library
 /composer.lock
 /vendor
