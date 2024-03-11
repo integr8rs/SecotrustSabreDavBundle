@@ -17,8 +17,14 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class SabreDavController
 {
-    public function execAction(Request $request, Server $server): StreamedResponse
+    public function __construct(
+        private readonly Server $server,
+    )
     {
-        return $server->handle($request);
+    }
+
+    public function execAction(Request $request): StreamedResponse
+    {
+        return $this->server->handle($request);
     }
 }

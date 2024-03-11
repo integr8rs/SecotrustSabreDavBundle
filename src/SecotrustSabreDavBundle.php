@@ -31,4 +31,17 @@ class SecotrustSabreDavBundle extends Bundle
         $container->addCompilerPass(new CollectionPass());
         $container->addCompilerPass(new PluginPass());
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPath(): string
+    {
+        if (!isset($this->path)) {
+            $reflected = new \ReflectionObject($this);
+            $this->path = \dirname($reflected->getFileName(),2);
+        }
+
+        return $this->path;
+    }
 }

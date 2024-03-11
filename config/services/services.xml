@@ -30,6 +30,10 @@
         <service id="secotrust.sabredav.exceptionHandler" class="%secotrust.sabredav.exceptionHandler.class%">
             <argument key="$debug">true</argument>
         </service>
+        <service id="secotrust.sabredav.controller" class="%secotrust.sabredav.controller.class%">
+            <tag>controller.service_arguments</tag>
+            <argument type="service" id="secotrust.sabredav.server" />
+        </service>
 
     </services>
 </container>
