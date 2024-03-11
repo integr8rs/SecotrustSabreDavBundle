@@ -25,16 +25,9 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('secotrust_sabre_dav');
-        if (\method_exists($treeBuilder, 'getRootNode')) {
-            $rootNode = $treeBuilder->getRootNode();
-        } else {
-            // BC layer for symfony/config 4.1 and older
-            $rootNode = $treeBuilder->root('secotrust_sabre_dav');
-        }
-
         $default_base_uri = '/app_dev.php/remote';
 
-        $rootNode
+        $treeBuilder->getRootNode()
             ->children()
                 ->scalarNode('root_dir')
                     ->example('%kernel.root_dir%/../web/dav/')
