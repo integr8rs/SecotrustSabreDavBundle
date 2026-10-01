@@ -24,7 +24,7 @@ Add DAV routes.
 ```yaml
 # app/config/routing.yml
 dav:
-    resource: "@SecotrustSabreDavBundle/Resources/config/routing.xml"
+    resource: "@SecotrustSabreDavBundle/config/routing.php"
     prefix: dav
 ```
 
