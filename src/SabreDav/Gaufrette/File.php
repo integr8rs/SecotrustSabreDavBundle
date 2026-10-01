@@ -33,7 +33,7 @@ class File extends BaseFile
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->file->getName();
     }
@@ -41,31 +41,35 @@ class File extends BaseFile
     /**
      * {@inheritdoc}
      */
-    public function getSize()
+    public function getSize(): int
     {
-        return $this->file->getSize();
+        return (int) $this->file->getSize();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getLastModified()
+    public function getLastModified(): ?int
     {
-        return $this->file->getMtime();
+        $mtime = $this->file->getMtime();
+
+        return false === $mtime ? null : (int) $mtime;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function put($data)
+    public function put($data): ?string
     {
         $this->file->setContent($data);
+
+        return null;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function get()
+    public function get(): mixed
     {
         return $this->file->getContent();
     }

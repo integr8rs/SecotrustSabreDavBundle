@@ -6,6 +6,18 @@
 
 The bundle now requires Symfony 6.4 or 7.x.
 
+### Native return types added
+
+To resolve the return-type deprecations reported by Symfony's `DebugClassLoader`, these methods now declare
+native return types. If you extend one of these classes and override these methods, add the same return types
+to your overrides:
+
+- `SabreDav\Gaufrette\Collection`: `getChildren(): array`, `getChild(): INode`, `childExists(): bool`,
+  `getName(): string`, `getLastModified(): ?int`
+- `SabreDav\Gaufrette\File`: `getName(): string`, `getSize(): int`, `getLastModified(): ?int`,
+  `put(): ?string`, `get(): mixed`
+- `SabreDav\CardDavBackend`: `createAddressBook(): mixed`
+
 ### Routing configuration moved from XML to PHP
 
 Symfony 7.4 deprecated the XML configuration format and Symfony 8.0 removes it, so the bundle's

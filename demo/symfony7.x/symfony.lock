@@ -1,7 +1,4 @@
 {
-    "knplabs/knp-gaufrette-bundle": {
-        "version": "v0.9.0"
-    },
     "secotrust/sabredav-bundle": {
         "version": "dev-main"
     },
