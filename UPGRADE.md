@@ -2,6 +2,10 @@
 
 ## Upgrade to 3.1
 
+### Symfony 5.4 is no longer supported
+
+The bundle now requires Symfony 6.4 or 7.x.
+
 ### Routing configuration moved from XML to PHP
 
 Symfony 7.4 deprecated the XML configuration format and Symfony 8.0 removes it, so the bundle's
