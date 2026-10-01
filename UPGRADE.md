@@ -2,9 +2,10 @@
 
 ## Upgrade to 3.1
 
-### Symfony 5.4 is no longer supported
+### Supported PHP and Symfony versions
 
-The bundle now requires Symfony 6.4 or 7.x.
+The bundle now requires PHP 8.2 or newer, and Symfony 6.4, 7.x or 8.x. Support for PHP 8.1 and Symfony 5.4,
+which are both end-of-life, was dropped.
 
 ### Native return types added
 

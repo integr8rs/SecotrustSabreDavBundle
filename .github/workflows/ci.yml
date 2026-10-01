@@ -9,48 +9,64 @@ on:
     branches: ['main']
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   static-analysis:
     name: Static Analysis
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-26.04
 
     steps:
       - name: "Checkout code"
-        uses: "actions/checkout@v4"
+        uses: "actions/checkout@v7"
 
       - name: "Install PHP"
         uses: "shivammathur/setup-php@v2"
         with:
           coverage: "none"
-          php-version: "8.0"
+          # lowest supported version, so newer syntax is caught
+          php-version: "8.2"
 
       - name: "Validate composer.json"
         run: "composer validate --strict --no-check-lock"
 
       - name: "Validate php-files"
-        run:  "php -l src && php -l tests"
+        # php -l only checks a single file: passing a directory always reports "No syntax errors"
+        run: "find src tests config -name '*.php' -print0 | xargs -0 -n1 php -l"
 
   tests:
-    name: "Tests ${{ matrix.php-version }} ${{ matrix.dependency-versions }}"
-    runs-on: ubuntu-22.04
+    name: "PHP ${{ matrix.php-version }}, Symfony ${{ matrix.symfony-version }} (${{ matrix.dependency-versions }})"
+    runs-on: ubuntu-26.04
     needs: static-analysis
 
     strategy:
       fail-fast: false
       matrix:
-        # normal, highest, non-dev installs
-        php-version: ['8.1', '8.2', '8.3']
-        composer-options: ['--prefer-stable']
-        dependency-versions: ['highest']
         include:
-          # testing lowest PHP version with lowest dependencies
-          - php-version: '8.1'
+          # lowest PHP version with lowest dependencies
+          - php-version: '8.2'
+            symfony-version: '6.4.*'
             dependency-versions: 'lowest'
-            composer-options: '--prefer-lowest'
+          - php-version: '8.2'
+            symfony-version: '6.4.*'
+            dependency-versions: 'highest'
+          - php-version: '8.3'
+            symfony-version: '7.4.*'
+            dependency-versions: 'highest'
+          - php-version: '8.4'
+            symfony-version: '7.4.*'
+            dependency-versions: 'highest'
+          - php-version: '8.4'
+            symfony-version: '8.*'
+            dependency-versions: 'highest'
+          - php-version: '8.5'
+            symfony-version: '8.*'
+            dependency-versions: 'highest'
 
     steps:
       - name: "Checkout code"
-        uses: "actions/checkout@v4"
+        uses: "actions/checkout@v7"
 
       - name: "Install PHP"
         uses: "shivammathur/setup-php@v2"
@@ -58,11 +74,17 @@ jobs:
           coverage: "none"
           php-version: "${{ matrix.php-version }}"
 
+      - name: "Restrict Symfony version"
+        run: "composer require --no-update --no-interaction 'symfony/framework-bundle:${{ matrix.symfony-version }}'"
+
       - name: "Composer install"
-        uses: "ramsey/composer-install@v3"
+        uses: "ramsey/composer-install@v4"
         with:
           dependency-versions: "${{ matrix.dependency-versions }}"
           composer-options: "--prefer-dist --no-progress"
+
+      - name: "Show installed Symfony version"
+        run: "composer show symfony/framework-bundle | grep -E '^(name|versions)'"
 
       - name: Unit Tests
         run: vendor/bin/simple-phpunit
