@@ -61,6 +61,11 @@ class File extends BaseFile
      */
     public function put($data): ?string
     {
+        // sabre/dav passes the request body as a stream, Gaufrette only accepts strings
+        if (is_resource($data)) {
+            $data = stream_get_contents($data);
+        }
+
         $this->file->setContent($data);
 
         return null;

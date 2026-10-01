@@ -57,7 +57,7 @@ class BasicAuth extends Basic
      *
      * @return array|bool
      */
-    public function getCredentials(EncoderFactoryInterface $encoder_service = null)
+    public function getCredentials(?EncoderFactoryInterface $encoder_service = null)
     {
         if (($user = $this->request->getRawServerValue('PHP_AUTH_USER')) && ($pass = $this->request->getRawServerValue('PHP_AUTH_PW'))) {
             $credentials = array($user, $pass);

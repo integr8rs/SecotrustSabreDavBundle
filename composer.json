@@ -22,7 +22,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "symfony/framework-bundle": "^6.4|^7.0",
+        "symfony/framework-bundle": "^6.4|^7.0|^8.0",
         "sabre/dav": "^4.1"
     },
     "suggest": {
@@ -34,6 +34,6 @@
         "psr-4": { "Secotrust\\Bundle\\SabreDavBundle\\Tests\\": "tests" }
     },
     "require-dev": {
-        "symfony/phpunit-bridge": "^7.0.4"
+        "symfony/phpunit-bridge": "^7.0.4|^8.0"
     }
 }

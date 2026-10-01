@@ -1,0 +1,15 @@
+
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+# Keep the (empty) storage directory of the Gaufrette adapter, see config/services.yaml
+!/var/
+/var/*
+!/var/uploads/
