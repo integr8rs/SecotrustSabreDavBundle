@@ -14,6 +14,7 @@ namespace Secotrust\Bundle\SabreDavBundle\SabreDav\Gaufrette;
 use Gaufrette\Filesystem;
 use Sabre\DAV\Collection as BaseCollection;
 use Sabre\DAV\Exception;
+use Sabre\DAV\INode;
 
 class Collection extends BaseCollection
 {
@@ -40,7 +41,7 @@ class Collection extends BaseCollection
     /**
      * {@inheritdoc}
      */
-    public function getChildren()
+    public function getChildren(): array
     {
         $children = array();
 
@@ -60,7 +61,7 @@ class Collection extends BaseCollection
     /**
      * {@inheritdoc}
      */
-    public function getChild($name)
+    public function getChild($name): INode
     {
         $key = $this->prefix.$name;
 
@@ -78,7 +79,7 @@ class Collection extends BaseCollection
     /**
      * {@inheritdoc}
      */
-    public function childExists($name)
+    public function childExists($name): bool
     {
         return $this->filesystem->has($this->prefix.$name);
     }
@@ -86,7 +87,7 @@ class Collection extends BaseCollection
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->prefix;
     }
@@ -94,9 +95,11 @@ class Collection extends BaseCollection
     /**
      * {@inheritdoc}
      */
-    public function getLastModified()
+    public function getLastModified(): ?int
     {
-        return $this->filesystem->getAdapter()->mtime($this->prefix);
+        $mtime = $this->filesystem->getAdapter()->mtime($this->prefix);
+
+        return false === $mtime ? null : (int) $mtime;
     }
 
     /**

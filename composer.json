@@ -21,8 +21,8 @@
         }
     ],
     "require": {
-        "php": "^8.1",
-        "symfony/framework-bundle": "^5.4|^6.4|^7.0",
+        "php": "^8.2",
+        "symfony/framework-bundle": "^6.4|^7.0|^8.0",
         "sabre/dav": "^4.1"
     },
     "suggest": {
@@ -33,12 +33,7 @@
     "autoload-dev": {
         "psr-4": { "Secotrust\\Bundle\\SabreDavBundle\\Tests\\": "tests" }
     },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "2.1.x-dev"
-        }
-    },
     "require-dev": {
-        "symfony/phpunit-bridge": "^7.0.4"
+        "symfony/phpunit-bridge": "^7.0.4|^8.0"
     }
 }

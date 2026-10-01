@@ -13,7 +13,7 @@ namespace Secotrust\Bundle\SabreDavBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
 /**
@@ -29,13 +29,13 @@ class SecotrustSabreDavExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../../config'));
-        $loader->load('services/services.xml');
+        $loader = new Loader\PhpFileLoader($container, new FileLocator(__DIR__.'/../../config'));
+        $loader->load('services/services.php');
 
         // load all plugins
         foreach ($config['plugins'] as $plugin => $enabled) {
             if ($enabled) {
-                $loader->load(sprintf('services/plugins/%s.xml', $plugin));
+                $loader->load(sprintf('services/plugins/%s.php', $plugin));
             }
         }
 

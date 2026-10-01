@@ -181,7 +181,7 @@ class CardDavBackend extends AbstractBackend implements SyncSupport
      *
      * @throws BadRequest
      */
-    public function createAddressBook($principalUri, $url, array $properties)
+    public function createAddressBook($principalUri, $url, array $properties): mixed
     {
         $values = array(
             'setLabel' => null,
@@ -205,7 +205,7 @@ class CardDavBackend extends AbstractBackend implements SyncSupport
 
         // check if current addressbooks-class can be instantiated
         if ((new \ReflectionClass($this->addressbooks_class))->isAbstract()) {
-            return;
+            return null;
         }
 
         $addressbook = new $this->addressbooks_class();
