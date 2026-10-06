@@ -5,6 +5,7 @@
     "keywords": ["SabreDAV", "WebDAV", "CalDAV", "CardDAV", "iCalendar"],
     "homepage": "https://github.com/secotrust/SecotrustSabreDavBundle",
     "license": "MIT",
+    "abandoned": "lawcloud/sabredav-bundle",
     "minimum-stability": "stable",
     "authors": [
         {
